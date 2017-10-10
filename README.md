@@ -1,3 +1,2 @@
-# PHP lesson-2
-### 数据类型,关系运算符
-
+# PHP lesson-1
+### PHP的介绍
