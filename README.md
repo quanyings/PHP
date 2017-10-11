@@ -1,2 +1,2 @@
-# PHP lesson-5 
-### 函数 function
+# PHP lesson-6 
+### 数组,字符串函数
