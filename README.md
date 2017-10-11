@@ -1,2 +1,2 @@
-# PHP lesson-6 
-### 数组,字符串函数
+# PHP lesson7 
+### date 日期
