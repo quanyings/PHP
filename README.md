@@ -1,2 +1,3 @@
-# PHP lesson-5 
-### 函数 function
+# PHP lesson-8 文件
+### hph引入文件
+### 客户端和服务器端配置信息
