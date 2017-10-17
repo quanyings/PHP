@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax3 请求真实接口API</title>
+	<style type="text/css">
+		.user{
+			background: hotpink;padding: 10px;display: flex;margin-bottom: 10px;
+		}
+		.user ul{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<button id="button">Github用户列表</button>
+	<br>
+	<h1>Github所有用户信息</h1>
+	<div id="users"></div>
+</body>
+<script type="text/javascript">
+	document.getElementById("button").addEventListener("click",loadUsers)
+	function loadUsers(){
+		var xhr=new XMLHttpRequest()
+		xhr.open("GET","http://api.github.com/users",true)
+	
+	xhr.onload = function(){
+				//将获取的json解析为对象
+				var users = JSON.parse(this.responseText);
+				var output = '';
+				for (var i = 0; i < users.length; i++) {
+					
+				output += `
+				   <div class="user">
+				   <img src="${users[i].avatar_url}" width="70" height="70" alt="" />
+                   <ul>
+                    <li>ID:${users[i].id}</li>
+                    <li>ID:${users[i].login}</li>
+                   </ul>
+				   </div>
+				`;
+
+			}
+			document.getElementById("users").innerHTML=output;
+			
+		}
+		xhr.send();
+	}
+</script>
+</html>

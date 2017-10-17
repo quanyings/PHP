@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习</title>
+	<style type="text/css">
+		table{
+
+			border: 1px solid hotpink;
+			/*table标签下去掉间隙*/
+			border-collapse: collapse;
+			margin-top: 10px;
+
+		}
+		td,th{
+			border: 1px solid hotpink;
+			padding: 10px;
+			margin: 10px;
+		}
+		td{
+			background: yellow;border-spacing: 10px;
+		}
+		th{
+			background: lightblue;
+		}
+	</style>
+</head>
+<body>
+	<button id="button1">点击</button>
+	<div id="user"></div>
+</body>
+<script type="text/javascript">
+	document.getElementById('button1').addEventListener('click',loadUser);
+	function loadUser(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","https://api.github.com/users",true);
+         
+
+		xhr.onload = function(){
+			if (this.status == 200) {
+				//console.log(this.responseText);
+				//将获取的json解析为对象
+				var user = JSON.parse(this.responseText);
+				console.log(user)
+				var output = '';
+				for (var i = 0; i < user.length; i++) {
+					console.log(user[i].id);
+				output += `
+				    <table>
+				    <thead>
+				    <tr>
+				    <th>login</th>
+					<th>id</th>
+					<th>avatar_url</th>
+					<th>gravatar_id</th>
+					<th>url</th>
+					<th>html_url</th>
+					<th>followers_url</th>
+					<th>following_url</th>
+					<th>gists_url</th>
+					<th>starred_url</th>
+					<th>subscriptions_url</th>
+					<th>organizations_url</th>
+					<th>repos_url</th>
+					<th>events_url</th>
+					<th>received_events_url</th>
+					<th>type</th>
+					<th>site_admin</th>
+                    </tr>    
+                    </thead>
+                    <tbody>
+                     <tr>
+                      <td>${user[i].login}</td>
+				        <td>${user[i].id}
+				        </td>
+                        <td>${user[i].avatar_url}
+                        </td>
+                        <td>${user[i].gravatar_id}
+                        </td>
+                        <td>${user[i].url}</td>
+				        <td>${user[i].html_url}
+				        </td>
+                        <td>${user[i].followers_url}
+                        </td>
+                        <td>${user[i].following_url}
+                        </td>
+                        <td>${user[i].gists_url}</td>
+				        <td>${user[i].starred_url}
+				        </td>
+                        <td>${user[i].subscriptions_url}
+                        </td>
+                        <td>${user[i].organizations_url}
+                        </td>
+                        <td>${user[i].repos_url}</td>
+				        <td>${user[i].events_url}
+				        </td>
+                        <td>${user[i].received_events_url}
+                        </td>
+                        <td>${user[i].type}
+                        </td>
+                         <td>${user[i].site_admin}
+                        </td>
+                     </tr>
+                    </tbody>
+				    </table>
+				`;
+				
+				}
+				document.getElementById('user').innerHTML = output;
+				
+			}
+		}
+		xhr.send();
+
+	}
+</script>
+</html>

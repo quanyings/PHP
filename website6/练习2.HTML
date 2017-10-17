@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习2</title>
+	<style type="text/css">
+		table{
+
+			border: 1px solid red;
+			/*table标签下去掉间隙*/
+			border-collapse: collapse;
+			margin-top: 10px;
+
+		}
+		td,th{
+			border: 1px solid red;
+			padding: 10px;
+			margin: 10px;
+		}
+		td{
+			background: yellow;border-spacing: 10px;
+		}
+		th{
+			background: hotpink;
+		}
+	</style>
+</head>
+<body>
+	<button id="button1">点击</button>
+	<div id="user"></div>
+</body>
+<script type="text/javascript">
+	document.getElementById('button1').addEventListener('click',loadUser);
+	function loadUser(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","https://jsonplaceholder.typicode.com/users",true);
+		xhr.onload = function(){
+			if (this.status == 200) {
+				//console.log(this.responseText);
+				//将获取的json解析为对象
+				var user = JSON.parse(this.responseText);
+				console.log(user)
+				var output = '';
+				for (var i = 0; i < user.length; i++) {
+					var leng=user[i].address
+					console.log(leng.street)
+					
+				output += `
+				    <table>
+				    <thead>
+				    <tr>
+				    <th>id</th>
+					<th>name</th>
+					<th>username</th>
+					<th>email</th>
+					<th>address</th>
+					<th>phone</th>
+					<th>website</th>
+					<th>company</th>
+					
+                    </tr>    
+                    </thead>
+                    <tbody>
+                     <tr>
+                      <td>${user[i].id}</td>
+				        <td>${user[i].name}
+				        </td>
+                        <td>${user[i].username}
+                        </td>
+                        <td>${user[i].email}
+                        </td>
+                        <td>${"street:"+user[i].address.street+'  '+"suite:"+user[i].address.suite+'  '+"city:"+user[i].address.city+'  '+"zipcode:"+user[i].address.zipcode+'  '+"geo:"+user[i].address.geo.lat+'  '+user[i].address.geo.lng}
+                        </td>
+                        <td>${user[i].phone}
+                        </td>
+                        <td>${user[i].website}
+                        </td>
+                        <td>${"name:"+user[i].company.name+'  '+"catchPhrase:"+user[i].company.catchPhrase+'  '+"bs:"+user[i].company.bs}
+                        </td>
+                       
+                     </tr>
+                    </tbody>
+				    </table>
+				`;
+				
+				}
+				document.getElementById('user').innerHTML = output;
+			  
+			}
+		}
+		xhr.send();
+
+	}
+</script>
+</html>
